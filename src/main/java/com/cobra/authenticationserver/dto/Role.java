@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Table(name="role")
-@JsonIgnoreProperties({"handleLazyInitializer", "handler"})
+//@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Role implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

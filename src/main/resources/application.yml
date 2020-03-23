@@ -17,6 +17,7 @@ security:
     client:
       client-id: cobra
       client-secret: bdzVzgIh39udscWyyuKiywAtyYp7uxtz
+      scope: all
     resource:
       user-info-uri: http://localhost:6265/user/me
 ---
