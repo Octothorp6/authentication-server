@@ -1,7 +1,22 @@
 spring:
+  profiles: local, default
   datasource:
     url: jdbc:h2:mem:testdb
     username: test
     password: test
     driver-class-name: org.h2.Driver
-    
+
+server:
+  port: 6265
+
+security:
+  oauth2:
+    authorization:
+      jwt:
+        keyValue: somereallylongsigningkey
+    client:
+      client-id: cobra
+      client-secret: bdzVzgIh39udscWyyuKiywAtyYp7uxtz
+    resource:
+      user-info-uri: http://localhost:6265/user/me
+---
