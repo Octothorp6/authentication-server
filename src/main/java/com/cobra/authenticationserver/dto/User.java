@@ -33,6 +33,17 @@ public class User implements Serializable {
     private Set<Role> roles = new HashSet<>();
 
 
+    public User() { }
+
+    public User(@NotNull String firstName, @NotNull String lastName, @Email @NotNull String email, @NotNull String username, @NotNull String password) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+    }
+
+
     public void setId(Long id) {
         this.id = id;
     }
