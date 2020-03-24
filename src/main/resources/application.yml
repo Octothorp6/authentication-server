@@ -21,3 +21,21 @@ security:
     resource:
       user-info-uri: http://localhost:6265/user/me
 ---
+spring:
+  profiles: cloud
+
+eureka:
+  instance:
+    nonSecurePort: 80
+    hostname: ${vcap.application.uris[0]}
+  client:
+    serviceUrl:
+      defaultZone: ${vcap.services.cobra-authentication-server.credentials.url}
+
+security:
+  oauth2:
+    resource:
+      token-info-uri: https://cobra-authentication-server.cfapps.io/oauth/check_token
+    client:
+      client-id: cobra
+      client-secret: bdzVzgIh39udscWyyuKiywAtyYp7uxtz

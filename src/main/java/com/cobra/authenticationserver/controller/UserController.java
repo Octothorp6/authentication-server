@@ -22,4 +22,9 @@ public class UserController {
     public String encrypt(@RequestBody String password) {
         return registrationService.encryptPassword(password);
     }
+
+    @PostMapping("/register/{roleName}")
+    public User register(@RequestBody @Valid User user, @PathVariable String roleName) {
+        return registrationService.register(user, roleName.toUpperCase());
+    }
 }

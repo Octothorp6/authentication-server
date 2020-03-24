@@ -1,0 +1,6 @@
+applications:
+  - name: cobra-authentication-server
+    path: build/libs/authentication-server-0.0.1-SNAPSHOT.jar
+    instances: 1
+    routes:
+      - route: cobra-authentication-server.cfapps.io
