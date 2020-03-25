@@ -6,10 +6,6 @@ spring:
     password: test
     driver-class-name: org.h2.Driver
 
-eureka:
-  client:
-    enabled: false
-
 server:
   port: 6265
 
