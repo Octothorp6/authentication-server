@@ -10,6 +10,7 @@ import java.security.Principal;
 
 @RestController
 public class UserController {
+
     @Autowired
     UserRegistrationService registrationService;
 
@@ -27,4 +28,5 @@ public class UserController {
     public User register(@RequestBody @Valid User user, @RequestParam(name = "role") String role) {
         return registrationService.register(user, role.toUpperCase());
     }
+
 }
