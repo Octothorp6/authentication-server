@@ -9,6 +9,10 @@ spring:
 server:
   port: 6265
 
+eureka:
+  client:
+    enabled: false
+
 security:
   oauth2:
     authorization:
