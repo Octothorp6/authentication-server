@@ -58,10 +58,10 @@ public class AuthenticationIt {
         // Map the response
         Map<String, Object> map = mapper.readValue(tokenString, new TypeReference<Map<String, Object>>() {});
 
-        result = this.mockMvc.perform(post("/oauth/check_token")
+        result = this.mockMvc.perform(post("/oauth/check_token/")
                 .with(httpBasic(clientId,clientSecret))
                 .contentType(MediaType.APPLICATION_FORM_URLENCODED)
-                .content("token=" +map.get("access_token")))
+                .content("token=" + map.get("access_token")))
                 .andExpect(status().isOk()).andReturn();
         tokenString = result.getResponse().getContentAsString();
         map = mapper.readValue(tokenString, new TypeReference<Map<String, Object>>() {});
