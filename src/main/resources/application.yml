@@ -1,35 +1,53 @@
+server:
+  port: 9003
+
 spring:
-  profiles: local, default
   datasource:
     url: jdbc:h2:mem:testdb
     username: test
     password: test
     driver-class-name: org.h2.Driver
-  jpa:
-    hibernate:
-      ddl-auto: update
-
-server:
-  port: 6265
-
-eureka:
-  client:
-    enabled: false
-
+    jpa:
+      hibernate:
+        ddl-auto: update
+---
+spring:
+  profiles: local, test, default
+  application:
+    name: auth-server
 security:
   oauth2:
     authorization:
       jwt:
-        keyValue: somereallylongsigningkey
+        keyValue: somereallyreallylongsigningkey
+    client:
+      client-id: cobra
+      client-secret: axNVzgIh39udscWyyuKiywAtyYp7uzbQ
+      scope: all
+    resource:
+      user-info-uri: http://localhost:9003/user/me
+      token-info-uri: http://localhost:9003/oauth/check_token
+
+eureka:
+  client:
+    enabled: false
+---
+spring:
+  profiles: cloud
+
+security:
+  oauth2:
+    authorization:
+      checkTokenAccess: isAuthenticated()
+      jwt:
+        keyValue: gMGl40z3aicb8exeFsuSJ6Jxq7FKjlfQ
     client:
       client-id: cobra
       client-secret: bdzVzgIh39udscWyyuKiywAtyYp7uxtz
       scope: all
     resource:
-      user-info-uri: http://localhost:6265/user/me
----
-spring:
-  profiles: cloud
+      user-info-uri: https://cobra-authentication-server.cfapps.io/user/me
+      token-info-uri: https://cobra-authentication-server.cfapps.io/oauth/check_token
 
 eureka:
   instance:
@@ -37,12 +55,34 @@ eureka:
     hostname: ${vcap.application.uris[0]}
   client:
     serviceUrl:
-      defaultZone: ${vcap.services.cobra-authentication-server.credentials.url}
+      defaultZone: https://cobra-eureka-server.cfapps.io/eureka
 
-security:
-  oauth2:
-    resource:
-      token-info-uri: https://cobra-authentication-server.cfapps.io/oauth/check_token
-    client:
-      client-id: cobra
-      client-secret: bdzVzgIh39udscWyyuKiywAtyYp7uxtz
+
+#---
+#spring:
+#  profiles: local, default
+#  datasource:
+#    url: jdbc:h2:mem:testdb
+#    username: test
+#    password: test
+#    driver-class-name: org.h2.Driver
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#
+#eureka:
+#  client:
+#    enabled: false
+#
+#security:
+#  oauth2:
+#    authorization:
+#      jwt:
+#        keyValue: somereallylongsigningkey
+#    client:
+#      client-id: cobra
+#      client-secret: bdzVzgIh39udscWyyuKiywAtyYp7uxtz
+#      scope: all
+#    resource:
+#      user-info-uri: http://localhost:6265/user/me
+#---

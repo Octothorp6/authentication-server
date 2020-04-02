@@ -1,6 +1,10 @@
 applications:
   - name: cobra-authentication-server
-    path: build/libs/authentication-server-0.0.1-SNAPSHOT.jar
+    path: build/libs/cobra-authentication-server-0.0.1-SNAPSHOT.jar
     instances: 1
+    env:
+      spring.profiles.active: cloud
     routes:
       - route: cobra-authentication-server.cfapps.io
+    services:
+      - eureka-server
